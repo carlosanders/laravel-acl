@@ -87,29 +87,29 @@ Acesse o [Wiki](https://github.com/kodeine/laravel-acl/wiki) para mais informaç
 
 Aqui está a lista TODO para a próxima versão (**2.0**).
 
-* [ ] Refactoring the source code.
-* [ ] Correct all issues.
-* [ ] Adding cache to final user permissions.
+* [ ] Refatorando o código-fonte.
+* [ ] Corrigir todos os problemas.
+* [ ] Adicionando cache às permissões do usuário final.
 
 # <a name="change-logs"></a>Registros de alterações
 
-**22 de Setembro 2016**
+***22 de Setembro 2016***
 * [x] Adicionado testes unitários
 
-**20 de setembro de 2016**
+***20 de setembro de 2016***
 * [X] Adicionado suporte para Laravel 5.3
 
-*19 de setembro de 2016*
+***19 de setembro de 2016***
 * [X] Adicionado suporte de cache para as Roles e Permissions.
 
-*14 de junho de 2015*
+***14 de junho de 2015***
 * [X] Adicionado a compatibilidade com versões anteriores para o laravel 5.0 e para o método lists().
 * [X] Adicionado [Blade Template Extensions] (https://github.com/carlosanders/laravel-acl/wiki/Blade-Extensions).
 
-*28 de março de 2015*
+***28 de março de 2015***
 * [X] Adicionado a Role Scope para que todos os usuários tenham um papel específico. Por exemplo, `User::role('admin')->get();` listará todos os usuários com a função(Role) `admin`.
 
-*7 de março de 2015*
+***7 de março de 2015***
 * [X] `is()` e `can()` agora suportam vírgula para `AND` e PIPE para operador `OR`. Ou passar um operador como um segundo parâmetro. [Mais informações] (https://github.com/carlosanders/laravel-acl/wiki/Validate-Permissions-and-Roles)
 * [X] Você pode vincular várias permissões para que eles herdam a Permissão. [Mais informações] (https://github.com/carlosanders/laravel-acl/wiki/Permissions-Inheritance)
 
