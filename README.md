@@ -1,5 +1,5 @@
 
-# Kodeine/Laravel-ACL - Tradução e Alterações para o Laravel 5.4 
+# Kodeine/Laravel-ACL - Tradução e Alterações para o Laravel 5
 
 [![Laravel](https://img.shields.io/badge/Laravel-~5.0-orange.svg?style=flat-square)](http://laravel.com)
 [![Source](http://img.shields.io/badge/source-kodeine/laravel--acl-blue.svg?style=flat-square)](https://github.com/kodeine/laravel-acl/)
