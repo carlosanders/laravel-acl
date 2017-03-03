@@ -2,10 +2,11 @@
 # Kodeine/Laravel-ACL - Tradução e Alterações para o Laravel 5
 
 [![Laravel](https://img.shields.io/badge/Laravel-~5.0-orange.svg?style=flat-square)](http://laravel.com)
-[![Source](http://img.shields.io/badge/source-kodeine/laravel--acl-blue.svg?style=flat-square)](https://github.com/kodeine/laravel-acl/)
-[![Build Status](http://img.shields.io/travis/kodeine/laravel--acl/master.svg?style=flat-square)](https://travis-ci.org/kodeine/laravel-acl)
+[![Source](https://img.shields.io/badge/source-carlosanders%2Flaravel--acl-blue.svg)](https://github.com/carlosanders/laravel-acl/)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![Total Downloads](http://img.shields.io/packagist/dt/kodeine/laravel-acl.svg?style=flat-square)](https://packagist.org/packages/kodeine/laravel-acl)
+[![Total Downloads](https://img.shields.io/packagist/dt/carlosanders/laravel-acl.svg?style=flat-square)](https://packagist.org/packages/carlosanders/laravel-acl)
+
+Este Pacote é uma tradução do **Kodeine/Laravel-ACL**, com alguns ajutes nos migrations.
 
 O Laravel ACL acrescenta Permissões(Permissions) baseadas em Função(Role) construído no **Auth System de Laravel 5**. O middleware ACL protege rotas e até mesmo métodos CRUD do Controller.
 
