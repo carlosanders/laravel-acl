@@ -28,7 +28,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->belongsToMany(config('auth.model'))->withTimestamps();
+        return $this->belongsToMany(config('auth.providers.users.model', config('auth.model')))->withTimestamps();
     }
 
     /**
@@ -38,7 +38,13 @@ class Role extends Model
      */
     public function getPermissions()
     {
-        return $this->getPermissionsInherited();
+        return \Cache::remember(
+            'acl.getPermissionsInheritedById_'.$this->id,
+            config('acl.cacheMinutes'),
+            function () {
+                return $this->getPermissionsInherited();
+            }
+        );
     }
 
     /**

@@ -86,9 +86,9 @@ trait Helper
             return preg_split('/ ?[,|] ?/', strtolower($str));
         }
 
-        return is_array($str) ?
-            array_filter($str, 'strtolower') : is_object($str) ?
-                $str : strtolower($str);
+        return is_array($str) ? 
+            array_filter($str, 'strtolower') : 
+            (is_object($str) ? $str : strtolower($str));
     }
 
     /**
@@ -103,7 +103,7 @@ trait Helper
         // item is a collection.
         if ($item instanceof Collection) {
             $item = $this->collectionAsArray(
-                $item->lists('name')
+                method_exists($item, 'pluck') ? $item->pluck('name') : $item->lists('name')
             );
         }
 

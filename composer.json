@@ -1,6 +1,6 @@
 {
-    "name": "kodeine/laravel-acl",
-    "description": "Light-weight role-based permissions for Laravel 5 built in Auth system.",
+    "name": "carlosanders/laravel-acl",
+    "description": "Tradução e ajuste no Sistema de ACL no Laravel 5 do Kodeine/Laravel-ACL",
     "license": "MIT",
     "keywords": [
         "laravel",
@@ -16,15 +16,30 @@
             "name": "Ahsen M.",
             "homepage": "https://github.com/kodeine",
             "role": "Developer"
+        },
+        {
+            "name": "Carlos Anders",
+            "homepage": "https://github.com/carlosanders",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.5.9",
         "illuminate/support": "~5.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0",
+        "orchestra/testbench": "~3.0",
+        "doctrine/dbal": "^2.5"
+    },
     "autoload": {
         "psr-4": {
             "Kodeine\\Acl\\": "src/Kodeine/Acl"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kodeine\\Acl\\Tests\\": "tests/"
         }
     }
 }

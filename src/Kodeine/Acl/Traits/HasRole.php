@@ -1,7 +1,12 @@
 <?php namespace Kodeine\Acl\Traits;
 
-
-trait HasRole
+/**
+ * Class HasRoleImplementation
+ * @package Kodeine\Acl\Traits
+ *
+ * @method static Builder|Collection|\Eloquent role($role, $column = null)
+ */
+trait HasRoleImplementation
 {
     use HasPermission;
 
@@ -31,8 +36,16 @@ trait HasRole
      */
     public function getRoles()
     {
-        $slugs = $this->roles->lists('slug');
-        return is_null($this->roles)
+        $this_roles = \Cache::remember(
+            'acl.getRolesById_'.$this->id,
+            config('acl.cacheMinutes'),
+            function () {
+                return $this->roles;
+            }
+        );
+
+        $slugs = method_exists($this_roles, 'pluck') ? $this_roles->pluck('slug','id') : $this_roles->lists('slug','id');
+        return is_null($this_roles)
             ? []
             : $this->collectionAsArray($slugs);
     }
@@ -42,13 +55,26 @@ trait HasRole
      * role. Role can be an id or slug.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int|string                            $role
+     * @param int|string $role
+     * @param string $column
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeRole($query, $role)
+    public function scopeRole($query, $role, $column = null)
     {
-        return $query->whereHas('roles', function ($query) use ($role) {
-            $query->where(is_numeric($role) ? 'id' : 'slug', $role);
+        if (is_null($role)) {
+            return $query;
+        }
+
+        return $query->whereHas('roles', function ($query) use ($role, $column) {
+            if (is_array($role)) {
+                $queryColumn = !is_null($column) ? $column : 'roles.slug';
+
+                $query->whereIn($queryColumn, $role);
+            } else {
+                $queryColumn = !is_null($column) ? $column : (is_numeric($role) ? 'roles.id' : 'roles.slug');
+
+                $query->where($queryColumn, $role);
+            }
         });
     }
 
@@ -58,11 +84,12 @@ trait HasRole
      * @param  string $slug
      * @return bool
      */
-    public function is($slug, $operator = null)
+    public function hasRole($slug, $operator = null)
     {
         $operator = is_null($operator) ? $this->parseOperator($slug) : $operator;
 
         $roles = $this->getRoles();
+        $roles = $roles instanceof \Illuminate\Contracts\Support\Arrayable ? $roles->toArray() : (array) $roles;
         $slug = $this->hasDelimiterToArray($slug);
 
         // array of slugs
@@ -238,7 +265,7 @@ trait HasRole
         if ( starts_with($method, 'is') and $method !== 'is' and ! starts_with($method, 'isWith') ) {
             $role = substr($method, 2);
 
-            return $this->is($role);
+            return $this->hasRole($role);
         }
 
         // Handle canDoSomething() methods
@@ -250,5 +277,20 @@ trait HasRole
         }
 
         return parent::__call($method, $arguments);
+    }
+}
+
+$laravel = app();
+if ($laravel instanceof \Illuminate\Foundation\Application && version_compare($laravel::VERSION, '5.3', '<')) {
+    trait HasRole
+    {
+        use HasRoleImplementation {
+            hasRole as is;
+        }
+    }
+} else {
+    trait HasRole
+    {
+        use HasRoleImplementation;
     }
 }

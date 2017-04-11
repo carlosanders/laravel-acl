@@ -1,30 +1,32 @@
 
-# Kodeine/Laravel-ACL
+# Kodeine/Laravel-ACL - Tradução e Alterações para o Laravel 5
 
 [![Laravel](https://img.shields.io/badge/Laravel-~5.0-orange.svg?style=flat-square)](http://laravel.com)
-[![Source](http://img.shields.io/badge/source-kodeine/laravel--acl-blue.svg?style=flat-square)](https://github.com/kodeine/laravel-acl/)
-[![Build Status](http://img.shields.io/travis/kodeine/laravel--acl/master.svg?style=flat-square)](https://travis-ci.org/kodeine/laravel-acl)
+[![Source](https://img.shields.io/badge/source-carlosanders%2Flaravel--acl-blue.svg)](https://github.com/carlosanders/laravel-acl/)
 [![License](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://tldrlegal.com/license/mit-license)
-[![Total Downloads](http://img.shields.io/packagist/dt/kodeine/laravel-acl.svg?style=flat-square)](https://packagist.org/packages/kodeine/laravel-acl)
+[![Total Downloads](https://img.shields.io/packagist/dt/carlosanders/laravel-acl.svg?style=flat-square)](https://packagist.org/packages/carlosanders/laravel-acl)
 
-Laravel ACL adds role based permissions to built in Auth System of Laravel 5. ACL middleware protects routes and even crud controller methods.
+Este Pacote é uma tradução do **Kodeine/Laravel-ACL**, com alguns ajutes nos migrations.
 
-# Table of Contents
-* [Requirements](#requirements)
-* [Getting Started](#getting-started)
-* [Documentation](#documentation)
-* [Roadmap](#roadmap)
-* [Change Logs](#change-logs)
-* [Contribution Guidelines](#contribution-guidelines)
+O Laravel ACL acrescenta Permissões(Permissions) baseadas em Função(Role) construído no **Auth System de Laravel 5**. O middleware ACL protege rotas e até mesmo métodos CRUD do Controller.
 
 
-# <a name="requirements"></a>Requirements
+# Índice
+* [Requisitos](#requirements)
+* [Guia de Introdução](#getting-started)
+* [Documentação](#documentation)
+* [Roteiro](#roadmap)
+* [Registros de alterações](#change-logs)
+* [Diretrizes de contribuição](#contribution-guidelines)
 
-* This package requires PHP 5.4+
 
-# <a name="getting-started"></a>Getting Started
+# <a name="requirements"></a>Requisitos
 
-1. Require the package in your `composer.json` and update your dependency with `composer update`:
+* This package requires PHP 5.5+
+
+# <a name="getting-started"></a>Guia de Introdução
+
+1. Adicione o pacote no seu `composer.json` e atualize sua dependência com `composer update`:
 
 ```
 "require": {
@@ -34,7 +36,7 @@ Laravel ACL adds role based permissions to built in Auth System of Laravel 5. AC
 },
 ```
 
-2. Add the package to your application service providers in `config/app.php`.
+2. Adicione o pacote ao seu application service providers em `config/app.php`.
 
 ```php
 'providers' => [
@@ -47,16 +49,16 @@ Laravel ACL adds role based permissions to built in Auth System of Laravel 5. AC
 ],
 ```
 
-3. Publish the package migrations to your application and run these with `php artisan migrate.
+3. Publique as migrações de pacotes para o seu aplicativo e execute-as com o `php artisan migrate`.
 
 ```
 $ php artisan vendor:publish --provider="Kodeine\Acl\AclServiceProvider"
 ```
 
-> **Use your own models.**
-> Once you publish, it publishes the configuration file where you can define your own models which should extend to Acl models.
+> **Use seus próprios models.**
+> Depois de publicar, ele publica o arquivo de configuração onde você pode definir seus próprios Models que devem se estender aos Models do ACL.
 
-4. Add the middleware to your `app/Http/Kernel.php`.
+4. Adicione o middleware em seu arquivo `app/Http/Kernel.php`.
 
 ```php
 protected $routeMiddleware = [
@@ -67,7 +69,7 @@ protected $routeMiddleware = [
 ];
 ```
 
-5. Add the HasRole trait to your `User` model.
+5. Adicione a trait HasRole em seu `User` Model.
 
 ```php
 use Kodeine\Acl\Traits\HasRole;
@@ -78,35 +80,44 @@ use Authenticatable, CanResetPassword, HasRole;
 }
 ```
 
-# <a name="documentation"></a>Documentation
+# <a name="documentation"></a>Documentação
 
-Follow along the [Wiki](https://github.com/kodeine/laravel-acl/wiki) to find out more.
+Acesse o [Wiki](https://github.com/kodeine/laravel-acl/wiki) para mais informações.
 
-# <a name="roadmap"></a>Roadmap
+# <a name="roadmap"></a>Roteiro
 
-Here's the TODO list for the next release (**2.0**).
+Aqui está a lista TODO para a próxima versão (**2.0**).
 
-* [ ] Refactoring the source code.
-* [ ] Correct all issues.
-* [ ] Adding cache to final user permissions.
-* [ ] Adding tests.
+* [ ] Refatorando o código-fonte.
+* [ ] Corrigir todos os problemas.
+* [ ] Adicionando cache às permissões do usuário final.
 
-# <a name="change-logs"></a>Change Logs
+# <a name="change-logs"></a>Registros de alterações
 
-**June 14, 2015 (latest)**
-* [x] Added backward compatibility to l5.0 for lists() method.
-* [x] Added [Blade Template Extensions](https://github.com/kodeine/laravel-acl/wiki/Blade-Extensions).
+***22 de Setembro 2016***
+* [x] Adicionado testes unitários
 
-*March 28, 2015*
-* [x] Added Role Scope to get all users having a specific role. e.g `User::role('admin')->get();` will list all users having `admin` role.
+***20 de setembro de 2016***
+* [X] Adicionado suporte para Laravel 5.3
 
-*March 7, 2015*
-* [x] `is()` and `can()` methods now support comma for `AND` and pipe as `OR` operator. Or pass an operator as a second param. [more information](https://github.com/kodeine/laravel-acl/wiki/Validate-Permissions-and-Roles)
-* [x] You can bind multiple permissions together so they inherit ones permission. [more information](https://github.com/kodeine/laravel-acl/wiki/Permissions-Inheritance)
+***19 de setembro de 2016***
+* [X] Adicionado suporte de cache para as Roles e Permissions.
 
-# <a name="contribution-guidelines"></a>Contribution Guidelines
+***14 de junho de 2015***
+* [X] Adicionado a compatibilidade com versões anteriores para o laravel 5.0 e para o método lists().
+* [X] Adicionado [Blade Template Extensions] (https://github.com/carlosanders/laravel-acl/wiki/Blade-Extensions).
 
-Support follows PSR-2 PHP coding standards, and semantic versioning.
+***28 de março de 2015***
+* [X] Adicionado a Role Scope para que todos os usuários tenham um papel específico. Por exemplo, `User::role('admin')->get();` listará todos os usuários com a função(Role) `admin`.
 
-Please report any issue you find in the issues page.
-Pull requests are welcome.
+***7 de março de 2015***
+* [X] `is()` e `can()` agora suportam vírgula para `AND` e PIPE para operador `OR`. Ou passar um operador como um segundo parâmetro. [Mais informações] (https://github.com/carlosanders/laravel-acl/wiki/Validate-Permissions-and-Roles)
+* [X] Você pode vincular várias permissões para que eles herdam a Permissão. [Mais informações] (https://github.com/carlosanders/laravel-acl/wiki/Permissions-Inheritance)
+
+
+# <a name="contribution-guidelines"></a>Diretrizes de contribuição
+
+O suporte segue os padrões de codificação PHP PSR-2 e a versão semântica.
+
+Informe qualquer problema que você encontrar na página de edições.
+Os pedidos de pull são bem-vindos.
